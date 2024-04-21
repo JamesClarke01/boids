@@ -19,7 +19,6 @@ func seekForce():
 	var desired = toTarget * max_speed #scale to max speed
 	return desired - vel #return steering vector to target
 
-
 func _physics_process(delta):	
 	
 	var force = seekForce()
