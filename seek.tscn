@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8lgxg5q07c0m"]
+
+[ext_resource type="Script" path="res://Boid.gd" id="1_mfugs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4xt6x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pedto"]
+
+[node name="root" type="Node3D"]
+
+[node name="Boid" type="CharacterBody3D" parent="."]
+script = ExtResource("1_mfugs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boid"]
+mesh = SubResource("BoxMesh_4xt6x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boid"]
+shape = SubResource("BoxShape3D_pedto")
+
+[node name="target" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7044, 3.13836, -9.25516)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.932179, 0.361999, 0, -0.361999, 0.932179, 0, 2.9091, 5.07572)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.30441, 0)
