@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8lgxg5q07c0m"]
+[gd_scene load_steps=7 format=3 uid="uid://c8lgxg5q07c0m"]
 
 [ext_resource type="Script" path="res://Boid.gd" id="1_mfugs"]
 [ext_resource type="Script" path="res://target.gd" id="2_eepa0"]
+[ext_resource type="Script" path="res://CameraBoid.gd" id="3_4p0n5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4xt6x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pedto"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cpnlx"]
+size = Vector3(100, 1, 100)
 
 [node name="root" type="Node3D"]
 
@@ -26,10 +30,19 @@ script = ExtResource("2_eepa0")
 wait_time = 5.0
 autostart = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.932179, 0.361999, 0, -0.361999, 0.932179, 0, 2.9091, 5.07572)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.30441, 0)
+
+[node name="CameraBoid" type="CharacterBody3D" parent="."]
+script = ExtResource("3_4p0n5")
+
+[node name="BoidCam" type="Camera3D" parent="CameraBoid"]
+transform = Transform3D(1, 0, 0, 0, 0.932179, 0.361999, 0, -0.361999, 0.932179, 0, 2.9091, 5.07572)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
+mesh = SubResource("BoxMesh_cpnlx")
 
 [connection signal="timeout" from="target/Timer" to="target" method="_on_timer_timeout"]
