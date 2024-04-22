@@ -1,13 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8lgxg5q07c0m"]
+[gd_scene load_steps=7 format=3 uid="uid://c8lgxg5q07c0m"]
 
 [ext_resource type="Script" path="res://Boid.gd" id="1_mfugs"]
 [ext_resource type="Script" path="res://target.gd" id="2_eepa0"]
 [ext_resource type="Script" path="res://CameraBoid.gd" id="3_4p0n5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4xt6x"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hafup"]
-albedo_color = Color(0.133333, 0.776471, 0.898039, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pedto"]
 
@@ -21,7 +18,6 @@ script = ExtResource("1_mfugs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Boid"]
 mesh = SubResource("BoxMesh_4xt6x")
-surface_material_override/0 = SubResource("StandardMaterial3D_hafup")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Boid"]
 shape = SubResource("BoxShape3D_pedto")
@@ -43,11 +39,10 @@ script = ExtResource("3_4p0n5")
 
 [node name="BoidCam" type="Camera3D" parent="CameraBoid"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
 mesh = SubResource("BoxMesh_cpnlx")
-skeleton = NodePath("")
 
 [connection signal="timeout" from="target/Timer" to="target" method="_on_timer_timeout"]
