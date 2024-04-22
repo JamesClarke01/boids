@@ -79,7 +79,9 @@ func applyBoidForce(delta):
 		set_velocity(vel)
 		move_and_slide()
 
+
 func _physics_process(delta):
 	lookAtBoid(delta)
 	applyBoidForce(delta)
+	
 

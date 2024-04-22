@@ -19,9 +19,10 @@ func seekForce():
 	var desired = toTarget * max_speed #scale to max speed
 	return desired - vel #return steering vector to target
 
-func _physics_process(delta):	
-	
+func applyBoidForce(delta):
 	var force = seekForce()
+	
+	DebugDraw3D.draw_arrow(global_transform.origin,  force, Color(0, 1, 0), 0.1)
 	
 	#check if vector is 0
 	if is_nan(force.x) or is_nan(force.y) or is_nan(force.z): 
@@ -42,4 +43,14 @@ func _physics_process(delta):
 		
 		set_velocity(vel)
 		move_and_slide()
+
+func drawGizmos():
+	DebugDraw3D.draw_arrow(global_transform.origin, velocity  , Color(0, 0, 1), 0.1)
+	
+	
+
+
+func _physics_process(delta):	
+	applyBoidForce(delta)
+	drawGizmos()
 	
