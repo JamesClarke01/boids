@@ -10,6 +10,7 @@ extends CharacterBody3D
 
 var target = null
 
+
 func _ready():
 	target = $"../target"
 
@@ -19,8 +20,24 @@ func seekForce():
 	var desired = toTarget * max_speed #scale to max speed
 	return desired - vel #return steering vector to target
 
+func arriveForce():
+	var slowingDistance = 40
+	var toTarget = target.global_transform.origin - global_transform.origin #get vector to target
+	var dist = toTarget.length() #get distance to target
+	
+	if dist < 2: #if distance is less than 2, stop
+		return Vector3.ZERO
+		
+	var rampedSpeed = (dist / slowingDistance) * max_speed #sets speed based on ratio between dist and slowingDistance, scaled to max_speed
+	
+	var limitedSpeed = min(max_speed, rampedSpeed) #Limit speed
+	var desired = (toTarget * limitedSpeed) / dist #desired velcity vector to get to target
+	return desired - vel #returns steering force
+
 func applyBoidForce(delta):
-	var force = seekForce()
+	#var force = seekForce()
+	var force = arriveForce()
+	
 	
 	DebugDraw3D.draw_arrow(global_transform.origin,  force, Color(0, 1, 0), 0.1)
 	
@@ -45,9 +62,7 @@ func applyBoidForce(delta):
 		move_and_slide()
 
 func drawGizmos():
-	DebugDraw3D.draw_arrow(global_transform.origin, velocity  , Color(0, 0, 1), 0.1)
-	
-	
+	DebugDraw3D.draw_arrow(global_transform.origin, vel, Color(0, 0, 1), 0.1)
 
 
 func _physics_process(delta):	

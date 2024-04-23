@@ -25,7 +25,8 @@ func _on_timer_timeout():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	DebugDraw3D.draw_sphere(global_position, 0.5, Color(1,0,0))
+	
 
 
 

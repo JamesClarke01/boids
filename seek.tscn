@@ -31,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7044, 3.13836, -9.25516)
 script = ExtResource("2_eepa0")
 
 [node name="Timer" type="Timer" parent="target"]
-wait_time = 5.0
+wait_time = 10.0
 autostart = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
